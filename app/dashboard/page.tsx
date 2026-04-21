@@ -13,20 +13,22 @@ export default function Dashboard() {
   const [jd, setJd] = useState("");
   const [result, setResult] = useState("");
   const [analysis, setAnalysis] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isStreaming, setIsStreaming] = useState(false);
 
   // 量化成果弹窗状态
   const [quantifyDialogOpen, setQuantifyDialogOpen] = useState(false);
   const [quantifyResult, setQuantifyResult] = useState<{
     modified_resume: string;
     changes_summary: string;
+    quality_check?: any;
   } | null>(null);
 
   // AI 一键量化成果
   const handleQuantify = async () => {
     if (!resume) return;
 
-    setIsLoading(true);
+    setIsAnalyzing(true);
     try {
       const response = await fetch("/api/quantify", {
         method: "POST",
@@ -43,7 +45,7 @@ export default function Dashboard() {
       console.error("Quantify error:", error);
       alert("量化失败，请重试");
     } finally {
-      setIsLoading(false);
+      setIsAnalyzing(false);
     }
   };
 
@@ -60,7 +62,8 @@ export default function Dashboard() {
   const handleOptimize = async () => {
     if (!resume || !jd) return;
 
-    setIsLoading(true);
+    setIsAnalyzing(true);
+    setIsStreaming(false);
     setResult("");
     setAnalysis(null);
 
@@ -76,6 +79,10 @@ export default function Dashboard() {
 
       const analyzeData = await analyzeResponse.json();
       setAnalysis(analyzeData);
+
+      // 分析完成，开始流式输出
+      setIsAnalyzing(false);
+      setIsStreaming(true);
 
       // 第二步：调用 optimize 接口（流式）
       const optimizeResponse = await fetch("/api/optimize", {
@@ -103,7 +110,8 @@ export default function Dashboard() {
       console.error("Optimize error:", error);
       alert("优化失败，请重试");
     } finally {
-      setIsLoading(false);
+      setIsAnalyzing(false);
+      setIsStreaming(false);
     }
   };
 
@@ -170,7 +178,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleQuantify}
-                disabled={!resume || isLoading}
+                disabled={!resume || isAnalyzing || isStreaming}
                 style={{
                   backgroundColor: '#ffffff',
                   color: '#0066ff',
@@ -185,11 +193,11 @@ export default function Dashboard() {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
-                  opacity: (!resume || isLoading) ? 0.5 : 1,
+                  opacity: (!resume || isAnalyzing || isStreaming) ? 0.5 : 1,
                   transition: 'all 0.2s ease'
                 }}
                 onMouseEnter={(e) => {
-                  if (!resume || isLoading) return;
+                  if (!resume || isAnalyzing || isStreaming) return;
                   e.currentTarget.style.backgroundColor = '#e6f0ff';
                 }}
                 onMouseLeave={(e) => {
@@ -318,7 +326,8 @@ export default function Dashboard() {
             analysis={analysis}
             result={result}
             onOptimize={handleOptimize}
-            isLoading={isLoading}
+            isAnalyzing={isAnalyzing}
+            isStreaming={isStreaming}
             canOptimize={!!resume && !!jd}
           />
         </div>
@@ -331,6 +340,7 @@ export default function Dashboard() {
           onOpenChange={setQuantifyDialogOpen}
           modifiedResume={quantifyResult.modified_resume}
           changesSummary={quantifyResult.changes_summary}
+          qualityCheck={quantifyResult.quality_check}
           onAccept={acceptQuantify}
           onCancel={() => {
             setQuantifyDialogOpen(false);

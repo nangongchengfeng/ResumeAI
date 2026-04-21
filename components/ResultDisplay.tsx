@@ -9,7 +9,8 @@ interface ResultDisplayProps {
   analysis: any;
   result: string;
   onOptimize: () => void;
-  isLoading: boolean;
+  isAnalyzing: boolean;
+  isStreaming: boolean;
   canOptimize: boolean;
 }
 
@@ -17,7 +18,8 @@ export default function ResultDisplay({
   analysis,
   result,
   onOptimize,
-  isLoading,
+  isAnalyzing,
+  isStreaming,
   canOptimize,
 }: ResultDisplayProps) {
   return (
@@ -51,7 +53,7 @@ export default function ResultDisplay({
         {analysis && <ScoreCard analysis={analysis} style={{ marginBottom: '24px' }} />}
 
         {/* 开始优化按钮（无结果时显示） */}
-        {!result && !isLoading && (
+        {!result && !isAnalyzing && !isStreaming && (
           <div
             className="flex flex-col items-center justify-center"
             style={{ minHeight: '256px', textAlign: 'center' }}
@@ -112,8 +114,8 @@ export default function ResultDisplay({
           </div>
         )}
 
-        {/* 加载中 */}
-        {isLoading && (
+        {/* 分析中 - 显示转圈 */}
+        {isAnalyzing && (
           <div
             className="flex flex-col items-center justify-center"
             style={{ minHeight: '256px', textAlign: 'center' }}
@@ -137,13 +139,13 @@ export default function ResultDisplay({
                 color: '#666666'
               }}
             >
-              AI 正在优化中...
+              AI 正在分析简历...
             </p>
           </div>
         )}
 
-        {/* 优化结果 */}
-        {result && (
+        {/* 流式输出中 - 直接显示内容，不显示转圈 */}
+        {(result || isStreaming) && (
           <div
             style={{
               fontSize: '16px',
@@ -153,6 +155,19 @@ export default function ResultDisplay({
               color: '#1a1a1a'
             }}
           >
+            {isStreaming && !result && (
+              <div
+                className="flex items-center gap-2 text-gray-500"
+                style={{ color: '#666666' }}
+              >
+                <div
+                  className="animate-pulse"
+                >
+                  AI 正在生成优化内容...
+                </div>
+                <span className="animate-pulse">...</span>
+              </div>
+            )}
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={{
               h1: (props: any) => <h1 {...props} style={{ fontSize: '26px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 700, lineHeight: 1.2, marginTop: '24px', marginBottom: '12px', color: '#1a1a1a' }} />,
               h2: (props: any) => <h2 {...props} style={{ fontSize: '22px', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif', fontWeight: 600, lineHeight: 1.3, marginTop: '20px', marginBottom: '10px', color: '#1a1a1a' }} />,
