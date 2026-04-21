@@ -47,7 +47,7 @@ npm run dev
 ## 项目结构
 
 ```
-Boss_JD/
+ResumeAI/
 ├── app/
 │   ├── page.tsx                    # 首页
 │   ├── layout.tsx                  # 根布局
