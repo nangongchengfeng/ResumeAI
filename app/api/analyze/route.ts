@@ -1,0 +1,96 @@
+import { NextRequest, NextResponse } from "next/server";
+import { MODELS, SILICONFLOW_API_KEY, SILICONFLOW_BASE_URL } from "@/lib/ai";
+
+export async function POST(request: NextRequest) {
+  try {
+    const { resume_text, job_description } = await request.json();
+
+    if (!resume_text || !job_description) {
+      return NextResponse.json(
+        { error: "简历和 JD 不能为空" },
+        { status: 400 }
+      );
+    }
+
+    const prompt = `你是一位拥有 10 年经验的资深技术招聘专家。请根据候选人简历和目标职位 JD，进行综合分析。
+
+候选人简历：
+${resume_text}
+
+目标职位 JD：
+${job_description}
+
+评分标准：
+- 关键词匹配度（40分）：是否覆盖了 JD 里的核心关键词
+- 成果量化程度（30分）：经历是否有具体数字支撑
+- STAR 法则运用（20分）：经历是否清晰完整
+- 语言专业性（10分）：表达是否专业职场
+
+等级划分：
+- A: 85-100
+- B: 70-84
+- C: 50-69
+- D: 0-49
+
+任务：
+1. 根据评分标准给简历打分（0-100）
+2. 给出对应等级
+3. 写出评分描述（一句话，比如"你的简历竞争力较强，但缺少部分关键关键词"）
+4. 从 JD 中提取候选人简历缺失的关键词（最多 10 个）
+5. 写一段简要分析（100 字以内）
+6. 给出评分明细（各维度得分）
+
+输出格式（JSON）：
+{
+  "score": 75,
+  "grade": "B",
+  "score_text": "你的简历竞争力较强，但缺少部分关键关键词",
+  "missing_keywords": ["React", "TypeScript", "微服务"],
+  "analysis": "简历经历丰富，但需要更多量化成果，并补充目标岗位的关键词",
+  "score_breakdown": {
+    "keyword_match": 30,
+    "quantification": 20,
+    "star_framework": 15,
+    "professionalism": 10
+  }
+}`;
+
+    const response = await fetch(`${SILICONFLOW_BASE_URL}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${SILICONFLOW_API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MODELS.default,
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7,
+        stream: false,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`API request failed: ${error}`);
+    }
+
+    const data = await response.json();
+    const content = data.choices?.[0]?.message?.content || "";
+
+    // 解析 JSON
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      throw new Error("无法解析 AI 响应");
+    }
+
+    const result = JSON.parse(jsonMatch[0]);
+
+    return NextResponse.json(result);
+  } catch (error) {
+    console.error("Analyze API error:", error);
+    return NextResponse.json(
+      { error: "分析失败，请重试" },
+      { status: 500 }
+    );
+  }
+}
