@@ -1,105 +1,126 @@
-'use client';
+"use client";
 
 import Link from "next/link";
-import { Sparkles, ArrowRight, FileText, TrendingUp, Target, Zap, Users, CheckCircle, Quote, ChevronRight, Twitter, Linkedin, Github, MessageCircle } from "lucide-react";
+import {
+  Sparkles,
+  Zap,
+  Target,
+  CheckCircle2,
+  ArrowRight,
+  TrendingUp,
+  Brain
+} from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div
+      className="min-h-screen flex flex-col"
+      style={{
+        background: 'linear-gradient(180deg, #ffffff 0%, #f5f5f7 100%)'
+      }}
+    >
       {/* 导航栏 */}
-      <header
+      <nav
         className="sticky top-0 z-50 border-b"
-        style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)', backdropFilter: 'blur(20px)' }}
+        style={{
+          background: 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'saturate(180%) blur(20px)',
+          WebkitBackdropFilter: 'saturate(180%) blur(20px)',
+          borderColor: 'rgba(0, 0, 0, 0.06)'
+        }}
       >
-        <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-8">
+        <div className="container mx-auto px-6" style={{ height: '52px' }}>
+          <div className="flex items-center justify-between h-full">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5" style={{ color: '#0066ff' }} />
-              <span
-                className="font-semibold"
+              <div
+                className="h-8 w-8 rounded-xl flex items-center justify-center"
                 style={{
-                  color: '#1a1a1a',
-                  fontSize: '16px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                  background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)'
                 }}
               >
-                AI 简历优化
+                <Sparkles className="h-4 w-4" style={{ color: '#ffffff', strokeWidth: 1.5 }} />
+              </div>
+              <span
+                style={{
+                  fontSize: '15px',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: 600,
+                  color: '#1d1d1f',
+                  letterSpacing: '-0.02em'
+                }}
+              >
+                简历优化大师
               </span>
             </div>
-            {/* 主导航链接 */}
-            <nav className="hidden md:flex items-center gap-6">
-              <Link
-                href="#features"
-                className="text-sm font-medium transition-colors hover:text-blue-600"
-                style={{ color: '#4a4a4a' }}
-              >
-                功能
-              </Link>
-              <Link
-                href="#examples"
-                className="text-sm font-medium transition-colors hover:text-blue-600"
-                style={{ color: '#4a4a4a' }}
-              >
-                案例
-              </Link>
-            </nav>
-          </div>
-          <Link href="/dashboard">
-            <button
-              className="px-4 py-2 rounded-lg font-medium transition-all hover:opacity-90 hover:shadow-md"
+            <Link
+              href="/dashboard"
+              className="transition-all duration-300 ease-out"
               style={{
-                backgroundColor: '#0066ff',
+                background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)',
                 color: '#ffffff',
-                fontSize: '14px',
-                minHeight: '36px'
+                fontSize: '13px',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                fontWeight: 500,
+                letterSpacing: '-0.01em',
+                padding: '8px 18px',
+                borderRadius: '980px',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 4px 12px rgba(0, 102, 255, 0.25)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.02)';
+                e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 102, 255, 0.35)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 102, 255, 0.25)';
               }}
             >
-              开始使用
-            </button>
-          </Link>
+              开始优化
+              <ArrowRight className="h-3.5 w-3.5" style={{ strokeWidth: 1.5 }} />
+            </Link>
+          </div>
         </div>
-      </header>
+      </nav>
 
-      <main className="flex-1">
-        {/* Hero Section - 左右两栏布局 */}
-        <section
-          className="py-20 md:py-28"
-          style={{
-            background: 'linear-gradient(180deg, #f0f7ff 0%, #ffffff 100%)'
-          }}
-        >
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-              {/* 左侧文案 */}
-              <div>
-                {/* Badge */}
-                <div
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
-                  style={{ backgroundColor: '#e6f0ff' }}
-                >
-                  <Sparkles className="h-4 w-4" style={{ color: '#0066ff' }} />
-                  <span
-                    style={{
-                      color: '#0066ff',
-                      fontSize: '14px',
-                      fontWeight: 500,
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    2026 跳槽季 · AI 助力
-                  </span>
-                </div>
-
-                {/* 主标题 */}
-                <h1
-                  className="mb-6"
+      {/* Hero 区域 */}
+      <section className="flex-1 flex items-center">
+        <div className="container mx-auto px-6 py-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* 左侧内容 */}
+            <div className="space-y-8">
+              <div
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
+                style={{
+                  background: 'rgba(0, 102, 255, 0.08)'
+                }}
+              >
+                <Sparkles className="h-4 w-4" style={{ color: '#0066ff', strokeWidth: 1.5 }} />
+                <span
                   style={{
-                    fontSize: 'clamp(32px, 5vw, 48px)',
-                    lineHeight: 1.1,
-                    fontWeight: 700,
-                    color: '#1a1a1a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                    letterSpacing: '-0.02em'
+                    fontSize: '13px',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 500,
+                    color: '#0066ff',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  2026 跳槽季 · AI 助力
+                </span>
+              </div>
+
+              <div className="space-y-4">
+                <h1
+                  style={{
+                    fontSize: '56px',
+                    lineHeight: 1.07,
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 600,
+                    color: '#1d1d1f',
+                    letterSpacing: '-0.028em'
                   }}
                 >
                   粘贴简历和目标 JD，
@@ -109,57 +130,61 @@ export default function Home() {
                   <span style={{ color: '#0066ff' }}>更有说服力</span>
                 </h1>
 
-                {/* 功能亮点列表 */}
-                <div className="mb-8 space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#e6f0ff' }}
-                    >
-                      <CheckCircle className="h-4 w-4" style={{ color: '#0066ff' }} />
-                    </div>
+                <p
+                  style={{
+                    fontSize: '19px',
+                    lineHeight: 1.5,
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 400,
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    letterSpacing: '-0.021em'
+                  }}
+                >
+                  专为社招 3-5 年求职者设计，量化你的工作成果，
+                  <br />
+                  匹配目标职位关键词，让简历通过率暴涨。
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5" style={{ color: '#0066ff', strokeWidth: 1.5 }} />
                     <span
                       style={{
-                        fontSize: '16px',
-                        color: '#1a1a1a',
+                        fontSize: '15px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
                         fontWeight: 500,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em'
                       }}
                     >
                       AI 一键量化成果
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#e6f0ff' }}
-                    >
-                      <CheckCircle className="h-4 w-4" style={{ color: '#0066ff' }} />
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5" style={{ color: '#0066ff', strokeWidth: 1.5 }} />
                     <span
                       style={{
-                        fontSize: '16px',
-                        color: '#1a1a1a',
+                        fontSize: '15px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
                         fontWeight: 500,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em'
                       }}
                     >
                       智能匹配 JD 关键词
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div
-                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: '#e6f0ff' }}
-                    >
-                      <CheckCircle className="h-4 w-4" style={{ color: '#0066ff' }} />
-                    </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="h-5 w-5" style={{ color: '#0066ff', strokeWidth: 1.5 }} />
                     <span
                       style={{
-                        fontSize: '16px',
-                        color: '#1a1a1a',
+                        fontSize: '15px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
                         fontWeight: 500,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em'
                       }}
                     >
                       用 STAR 法则重写经历
@@ -167,811 +192,403 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* 结果导向的副标题 */}
-                <p
-                  className="mb-8 max-w-lg"
-                  style={{
-                    fontSize: '17px',
-                    lineHeight: 1.6,
-                    color: '#0066ff',
-                    fontWeight: 600,
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  简历通过率提升 300%，让面试官眼前一亮 ✨
-                </p>
-
-                {/* CTA 按钮 */}
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/dashboard">
-                    <button
-                      className="px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:translate-y-[-2px] hover:shadow-lg flex items-center gap-2"
+                <div className="flex items-center gap-4">
+                  {/* 数据量化标签 - 优化版 */}
+                  <div className="relative">
+                    <div
+                      className="absolute inset-0 rounded-full opacity-30"
                       style={{
-                        backgroundColor: '#0066ff',
-                        color: '#ffffff',
-                        boxShadow: '0 8px 30px rgba(0, 102, 255, 0.3)',
-                        minHeight: '52px'
+                        background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)',
+                        filter: 'blur(12px)',
+                        transform: 'translateY(2px)'
+                      }}
+                    />
+                    <div
+                      className="relative px-5 py-2.5 rounded-full flex items-center gap-2"
+                      style={{
+                        background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)',
+                        boxShadow: '0 4px 12px rgba(0, 102, 255, 0.3)'
                       }}
                     >
-                      开始优化
-                      <ArrowRight className="h-5 w-5" />
-                    </button>
-                  </Link>
-                </div>
-              </div>
+                      <TrendingUp className="h-4.5 w-4.5" style={{ color: '#ffffff', strokeWidth: 1.5 }} />
+                      <span
+                        style={{
+                          fontSize: '14px',
+                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                          fontWeight: 700,
+                          color: '#ffffff',
+                          letterSpacing: '-0.01em'
+                        }}
+                      >
+                        数据量化
+                      </span>
+                      <span
+                        style={{
+                          fontSize: '16px',
+                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                          fontWeight: 800,
+                          color: '#ffffff',
+                          letterSpacing: '-0.02em'
+                        }}
+                      >
+                        +300%
+                      </span>
+                    </div>
+                  </div>
 
-              {/* 右侧 - 简历优化前后对比 Mockup */}
-              <div className="relative hidden md:block">
-                <div className="absolute -top-8 -right-8 w-72 h-72 bg-blue-200 rounded-full blur-3xl opacity-30" />
-                <div className="absolute -bottom-8 -left-8 w-72 h-72 bg-blue-100 rounded-full blur-3xl opacity-30" />
-
-                {/* 典型案例标题 */}
-                <div className="mb-6">
-                  <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full" style={{ backgroundColor: '#e6f0ff' }}>
-                    <Users className="h-4 w-4" style={{ color: '#0066ff' }} />
-                    <span style={{
-                      color: '#0066ff',
+                  <span
+                    style={{
                       fontSize: '14px',
-                      fontWeight: 600,
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}>
-                      真实案例 · 前端工程师求职
+                      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                      fontWeight: 500,
+                      color: '#0066ff',
+                      letterSpacing: '-0.01em'
+                    }}
+                  >
+                    简历通过率提升，让面试官眼前一亮 ✨
+                  </span>
+                </div>
+
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center gap-2 transition-all duration-300 ease-out"
+                  style={{
+                    background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)',
+                    color: '#ffffff',
+                    fontSize: '17px',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 600,
+                    letterSpacing: '-0.021em',
+                    padding: '14px 32px',
+                    borderRadius: '12px',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    boxShadow: '0 8px 24px rgba(0, 102, 255, 0.35)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                    e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 102, 255, 0.45)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'scale(1)';
+                    e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 102, 255, 0.35)';
+                  }}
+                  onMouseDown={(e) => {
+                    e.currentTarget.style.transform = 'scale(0.98)';
+                  }}
+                  onMouseUp={(e) => {
+                    e.currentTarget.style.transform = 'scale(1.02)';
+                  }}
+                >
+                  开始优化
+                  <ArrowRight className="h-5 w-5" style={{ strokeWidth: 1.5 }} />
+                </Link>
+              </div>
+            </div>
+
+            {/* 右侧预览卡片 */}
+            <div className="relative">
+              {/* 装饰性背景 */}
+              <div
+                className="absolute -top-10 -right-10 w-72 h-72 rounded-full opacity-20"
+                style={{
+                  background: 'radial-gradient(circle, rgba(0, 102, 255, 0.3) 0%, transparent 70%)'
+                }}
+              />
+
+              {/* 卡片容器 */}
+              <div className="space-y-5">
+                {/* 优化前卡片 */}
+                <div
+                  className="rounded-2xl p-6 relative"
+                  style={{
+                    background: '#ffffff',
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.06)',
+                    border: '1px solid rgba(0, 0, 0, 0.05)'
+                  }}
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
+                      <div className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
+                      <div className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
+                    </div>
+                    <span
+                      style={{
+                        fontSize: '12px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: 500,
+                        color: 'rgba(0, 0, 0, 0.4)',
+                        letterSpacing: '-0.01em'
+                      }}
+                    >
+                      优化前
                     </span>
                   </div>
-                </div>
-
-                <div className="relative space-y-6">
-                  {/* 优化前 */}
-                  <div
-                    className="p-6 rounded-2xl relative"
-                    style={{
-                      backgroundColor: '#ffffff',
-                      border: '1px solid #e2e8f0',
-                      boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)'
-                    }}
-                  >
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-red-400" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                      <div className="w-3 h-3 rounded-full bg-green-400" />
-                      <span className="ml-2 text-xs text-gray-400">优化前</span>
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-sm font-semibold text-gray-700">工作经历</div>
-                      <div className="text-xs text-gray-500 leading-relaxed">
-                        • 负责前端开发工作<br/>
-                        • 写了一些项目代码<br/>
-                        • 参与团队协作
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* 箭头 */}
-                  <div className="flex justify-center">
-                    <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
-                      <ChevronRight className="h-5 w-5 text-blue-600" />
-                    </div>
-                  </div>
-
-                  {/* 优化后 */}
-                  <div
-                    className="p-6 rounded-2xl relative border-2"
-                    style={{
-                      backgroundColor: '#ffffff',
-                      borderColor: '#0066ff',
-                      boxShadow: '0 20px 25px -5px rgba(0, 102, 255, 0.15)'
-                    }}
-                  >
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-red-400" />
-                      <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                      <div className="w-3 h-3 rounded-full bg-green-400" />
-                      <span className="ml-2 text-xs font-medium" style={{ color: '#0066ff' }}>优化后</span>
-                      <CheckCircle className="h-4 w-4 ml-auto" style={{ color: '#0066ff' }} />
-                    </div>
-                    <div className="space-y-3">
-                      <div className="text-sm font-semibold text-gray-800">工作经历</div>
-                      <div className="text-xs text-gray-600 leading-relaxed">
-                        • <span className="text-blue-600 font-medium">主导</span>公司核心产品前端架构设计，<span className="text-blue-600 font-medium">用户量提升 200%</span><br/>
-                        • <span className="text-blue-600 font-medium">使用 React + TypeScript</span> 重构项目，<span className="text-blue-600 font-medium">性能提升 40%</span><br/>
-                        • <span className="text-blue-600 font-medium">带领 5 人小组</span>，建立代码规范，效率提升 30%
-                      </div>
-                    </div>
-                    {/* 高亮修改标记 */}
-                    <div className="absolute top-1/2 -right-3">
-                      <div className="px-2 py-1 bg-red-100 rounded text-xs font-medium text-red-600 border border-red-200">
-                        数据量化 +300%
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 使用流程 */}
-        <section id="examples" className="py-20" style={{ backgroundColor: '#ffffff' }}>
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2
-                className="mb-4"
-                style={{
-                  fontSize: '36px',
-                  lineHeight: 1.2,
-                  fontWeight: 700,
-                  color: '#1a1a1a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                三步搞定简历优化
-              </h2>
-              <p
-                style={{
-                  fontSize: '16px',
-                  lineHeight: 1.6,
-                  color: '#666666',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                简单高效，一分钟让你的简历焕然一新
-              </p>
-            </div>
-
-            <div className="max-w-5xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-                {/* 连接线 - 桌面版 */}
-                <div className="hidden md:block absolute top-12 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-blue-200 via-blue-400 to-blue-200" />
-
-                {/* 步骤 1 */}
-                <div className="relative text-center">
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10"
-                    style={{ backgroundColor: '#e6f0ff', border: '4px solid #ffffff', boxShadow: '0 4px 12px rgba(0, 102, 255, 0.15)' }}
-                  >
-                    <FileText className="h-10 w-10" style={{ color: '#0066ff' }} />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{ backgroundColor: '#0066ff' }}>1</div>
-                  <h3
-                    className="mb-3"
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: 600,
-                      color: '#1a1a1a',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    复制简历
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '15px',
-                      lineHeight: 1.6,
-                      color: '#666666',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    把你的现有简历和目标 JD 粘贴进来
-                  </p>
-                </div>
-
-                {/* 步骤 2 */}
-                <div className="relative text-center">
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10"
-                    style={{ backgroundColor: '#e6f0ff', border: '4px solid #ffffff', boxShadow: '0 4px 12px rgba(0, 102, 255, 0.15)' }}
-                  >
-                    <Sparkles className="h-10 w-10" style={{ color: '#0066ff' }} />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{ backgroundColor: '#0066ff' }}>2</div>
-                  <h3
-                    className="mb-3"
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: 600,
-                      color: '#1a1a1a',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    AI 优化
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '15px',
-                      lineHeight: 1.6,
-                      color: '#666666',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    AI 智能分析，量化成果，匹配关键词
-                  </p>
-                </div>
-
-                {/* 步骤 3 */}
-                <div className="relative text-center">
-                  <div
-                    className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 relative z-10"
-                    style={{ backgroundColor: '#e6f0ff', border: '4px solid #ffffff', boxShadow: '0 4px 12px rgba(0, 102, 255, 0.15)' }}
-                  >
-                    <ArrowRight className="h-10 w-10" style={{ color: '#0066ff' }} />
-                  </div>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center font-bold text-white" style={{ backgroundColor: '#0066ff' }}>3</div>
-                  <h3
-                    className="mb-3"
-                    style={{
-                      fontSize: '20px',
-                      fontWeight: 600,
-                      color: '#1a1a1a',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    分享使用
-                  </h3>
-                  <p
-                    style={{
-                      fontSize: '15px',
-                      lineHeight: 1.6,
-                      color: '#666666',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                    }}
-                  >
-                    一键复制优化后的简历，直接投递使用
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 功能特性 */}
-        <section id="features" className="py-20" style={{ backgroundColor: '#f8fafc' }}>
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2
-                className="mb-4"
-                style={{
-                  fontSize: '36px',
-                  lineHeight: 1.2,
-                  fontWeight: 700,
-                  color: '#1a1a1a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                三大核心功能
-              </h2>
-              <p
-                style={{
-                  fontSize: '16px',
-                  lineHeight: 1.6,
-                  color: '#666666',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                一站式解决简历优化的所有痛点
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {/* 功能卡片 1 */}
-              <div
-                className="p-8 rounded-2xl transition-all hover:translate-y-[-4px]"
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: '#e6f0ff' }}
-                >
-                  <TrendingUp className="h-7 w-7" style={{ color: '#0066ff' }} />
-                </div>
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontSize: '20px',
-                    fontWeight: 600,
-                    color: '#1a1a1a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  AI 量化成果
-                </h3>
-                <p
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.6,
-                    color: '#666666',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  把"做了一些项目"变成"主导 X 项目，提升 Y%"，用数据说话更有说服力
-                </p>
-              </div>
-
-              {/* 功能卡片 2 */}
-              <div
-                className="p-8 rounded-2xl transition-all hover:translate-y-[-4px]"
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: '#e6f0ff' }}
-                >
-                  <Target className="h-7 w-7" style={{ color: '#0066ff' }} />
-                </div>
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontSize: '20px',
-                    fontWeight: 600,
-                    color: '#1a1a1a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  关键词匹配
-                </h3>
-                <p
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.6,
-                    color: '#666666',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  智能识别 JD 关键词，自然融入简历，轻松通过 ATS 筛选
-                </p>
-              </div>
-
-              {/* 功能卡片 3 */}
-              <div
-                className="p-8 rounded-2xl transition-all hover:translate-y-[-4px]"
-                style={{
-                  backgroundColor: '#ffffff',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <div
-                  className="w-14 h-14 rounded-xl flex items-center justify-center mb-6"
-                  style={{ backgroundColor: '#e6f0ff' }}
-                >
-                  <Zap className="h-7 w-7" style={{ color: '#0066ff' }} />
-                </div>
-                <h3
-                  className="mb-3"
-                  style={{
-                    fontSize: '20px',
-                    fontWeight: 600,
-                    color: '#1a1a1a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  STAR 法则
-                </h3>
-                <p
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.6,
-                    color: '#666666',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  用标准面试框架重写经历，让面试官一眼看到你的价值
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* 用户证言 */}
-        <section className="py-20" style={{ backgroundColor: '#ffffff' }}>
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center mb-16">
-              <h2
-                className="mb-4"
-                style={{
-                  fontSize: '36px',
-                  lineHeight: 1.2,
-                  fontWeight: 700,
-                  color: '#1a1a1a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                用户真实反馈
-              </h2>
-              <p
-                style={{
-                  fontSize: '16px',
-                  lineHeight: 1.6,
-                  color: '#666666',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                看看他们是如何通过 AI 优化拿到心仪 offer 的
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {/* 证言卡片 1 */}
-              <div
-                className="p-8 rounded-2xl relative"
-                style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <Quote className="h-8 w-8 mb-4" style={{ color: '#0066ff', opacity: 0.3 }} />
-                <p
-                  className="mb-6"
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.7,
-                    color: '#4a4a4a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  "用了这个工具后，我的简历通过率从 10% 提升到了 50%，真的太神奇了！量化成果的功能特别棒。"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold"
-                    style={{ backgroundColor: '#0066ff' }}
-                  >
-                    张
-                  </div>
-                  <div>
-                    <div
-                      className="font-semibold"
+                  <div className="space-y-2">
+                    <p
                       style={{
-                        fontSize: '15px',
-                        color: '#1a1a1a',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        fontSize: '14px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: 600,
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em'
                       }}
                     >
-                      张明
-                    </div>
-                    <div
+                      工作经历
+                    </p>
+                    <p
                       style={{
                         fontSize: '13px',
-                        color: '#666666',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: 400,
+                        color: 'rgba(0, 0, 0, 0.5)',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.6
                       }}
                     >
-                      前端工程师 · 头部互联网公司
-                    </div>
+                      • 负责前端开发工作
+                      <br />
+                      • 写了一些项目代码
+                      <br />
+                      • 参与团队协作
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              {/* 证言卡片 2 */}
-              <div
-                className="p-8 rounded-2xl relative"
-                style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <Quote className="h-8 w-8 mb-4" style={{ color: '#0066ff', opacity: 0.3 }} />
-                <p
-                  className="mb-6"
+                {/* 箭头装饰 */}
+                <div className="flex justify-center">
+                  <div
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.03)'
+                    }}
+                  >
+                    <ArrowRight className="h-5 w-5" style={{ color: 'rgba(0, 0, 0, 0.4)', strokeWidth: 1.5 }} />
+                  </div>
+                </div>
+
+                {/* 优化后卡片 */}
+                <div
+                  className="rounded-2xl p-6 relative"
                   style={{
-                    fontSize: '15px',
-                    lineHeight: 1.7,
-                    color: '#4a4a4a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                    background: '#ffffff',
+                    boxShadow: '0 8px 32px rgba(0, 102, 255, 0.15)',
+                    border: '2px solid #0066ff'
                   }}
                 >
-                  "STAR 法则重写的经历让我在面试时更有条理，面试官说我的简历看起来非常专业！"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold"
-                    style={{ backgroundColor: '#3b82f6' }}
-                  >
-                    李
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#ff5f57' }} />
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#febc2e' }} />
+                        <div className="w-3 h-3 rounded-full" style={{ background: '#28c840' }} />
+                      </div>
+                      <span
+                        style={{
+                          fontSize: '12px',
+                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                          fontWeight: 600,
+                          color: '#0066ff',
+                          letterSpacing: '-0.01em'
+                        }}
+                      >
+                        优化后
+                      </span>
+                    </div>
+                    <CheckCircle2 className="h-5 w-5" style={{ color: '#0066ff', strokeWidth: 1.5 }} />
                   </div>
-                  <div>
-                    <div
-                      className="font-semibold"
+                  <div className="space-y-2">
+                    <p
                       style={{
-                        fontSize: '15px',
-                        color: '#1a1a1a',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        fontSize: '14px',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: 600,
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em'
                       }}
                     >
-                      李雪
-                    </div>
-                    <div
+                      工作经历
+                    </p>
+                    <p
                       style={{
                         fontSize: '13px',
-                        color: '#666666',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: 400,
+                        color: '#1d1d1f',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.8
                       }}
                     >
-                      产品经理 · 头部互联网公司
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* 证言卡片 3 */}
-              <div
-                className="p-8 rounded-2xl relative"
-                style={{
-                  backgroundColor: '#f8fafc',
-                  border: '1px solid #e2e8f0'
-                }}
-              >
-                <Quote className="h-8 w-8 mb-4" style={{ color: '#0066ff', opacity: 0.3 }} />
-                <p
-                  className="mb-6"
-                  style={{
-                    fontSize: '15px',
-                    lineHeight: 1.7,
-                    color: '#4a4a4a',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  "关键词匹配功能帮我通过了好多大厂的 ATS 筛选，终于收到面试邀请了！"
-                </p>
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold"
-                    style={{ backgroundColor: '#60a5fa' }}
-                  >
-                    王
-                  </div>
-                  <div>
-                    <div
-                      className="font-semibold"
-                      style={{
-                        fontSize: '15px',
-                        color: '#1a1a1a',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                      }}
-                    >
-                      王浩
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '13px',
-                        color: '#666666',
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                      }}
-                    >
-                      算法工程师 · 头部互联网公司
-                    </div>
+                      • 主导公司核心产品前端架构设计，<strong style={{ color: '#0066ff' }}>用户量提升 200%</strong>
+                      <br />
+                      • 使用 React + TypeScript 重构项目，<strong style={{ color: '#0066ff' }}>性能提升 40%</strong>
+                      <br />
+                      • 带领 5 人小组，建立代码规范，<strong style={{ color: '#0066ff' }}>效率提升 30%</strong>
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section
-          className="py-20"
-          style={{ backgroundColor: '#f0f7ff' }}
-        >
-          <div className="container mx-auto px-4">
-            <div className="max-w-3xl mx-auto text-center">
-              <h2
-                className="mb-6"
-                style={{
-                  fontSize: '36px',
-                  lineHeight: 1.2,
-                  fontWeight: 700,
-                  color: '#1a1a1a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                准备好优化你的简历了吗？
-              </h2>
-              <p
-                className="mb-10"
-                style={{
-                  fontSize: '18px',
-                  lineHeight: 1.6,
-                  color: '#4a4a4a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                立即开始，让 AI 帮你把简历打磨得更有说服力
-              </p>
-              <Link href="/dashboard">
-                <button
-                  className="px-8 py-4 rounded-xl font-semibold text-lg transition-all hover:translate-y-[-2px] hover:shadow-lg flex items-center gap-2 mx-auto"
-                  style={{
-                    backgroundColor: '#0066ff',
-                    color: '#ffffff',
-                    boxShadow: '0 8px 30px rgba(0, 102, 255, 0.3)',
-                    minHeight: '52px'
-                  }}
-                >
-                  立即开始
-                  <ArrowRight className="h-5 w-5" />
-                </button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      {/* 页脚 - 扩展版本 */}
-      <footer className="py-12" style={{ backgroundColor: '#1a1a1a' }}>
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-            {/* 品牌信息 */}
-            <div className="md:col-span-1">
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="h-5 w-5" style={{ color: '#0066ff' }} />
-                <span
-                  className="font-semibold"
-                  style={{
-                    color: '#ffffff',
-                    fontSize: '16px',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                  }}
-                >
-                  AI 简历优化
-                </span>
-              </div>
-              <p
-                style={{
-                  fontSize: '14px',
-                  color: '#9ca3af',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                  lineHeight: 1.6
-                }}
-              >
-                用 AI 帮你找到更好的工作
-              </p>
-            </div>
-
-            {/* 产品链接 */}
-            <div>
-              <h4
-                className="font-semibold mb-4"
-                style={{
-                  color: '#ffffff',
-                  fontSize: '14px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                产品
-              </h4>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="#features"
-                    style={{
-                      fontSize: '14px',
-                      color: '#9ca3af',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      textDecoration: 'none'
-                    }}
-                    className="hover:text-white transition-colors"
-                  >
-                    功能
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    style={{
-                      fontSize: '14px',
-                      color: '#9ca3af',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      textDecoration: 'none'
-                    }}
-                    className="hover:text-white transition-colors"
-                  >
-                    帮助中心
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* 法律链接 */}
-            <div>
-              <h4
-                className="font-semibold mb-4"
-                style={{
-                  color: '#ffffff',
-                  fontSize: '14px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                法律
-              </h4>
-              <ul className="space-y-3">
-                <li>
-                  <Link
-                    href="#"
-                    style={{
-                      fontSize: '14px',
-                      color: '#9ca3af',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      textDecoration: 'none'
-                    }}
-                    className="hover:text-white transition-colors"
-                  >
-                    隐私政策
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="#"
-                    style={{
-                      fontSize: '14px',
-                      color: '#9ca3af',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                      textDecoration: 'none'
-                    }}
-                    className="hover:text-white transition-colors"
-                  >
-                    服务条款
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* 社交媒体 */}
-            <div>
-              <h4
-                className="font-semibold mb-4"
-                style={{
-                  color: '#ffffff',
-                  fontSize: '14px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-                }}
-              >
-                关注我们
-              </h4>
-              <div className="flex gap-4">
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-700"
-                  style={{ backgroundColor: '#374151' }}
-                >
-                  <Twitter className="h-5 w-5" style={{ color: '#ffffff' }} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-700"
-                  style={{ backgroundColor: '#374151' }}
-                >
-                  <Linkedin className="h-5 w-5" style={{ color: '#ffffff' }} />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-700"
-                  style={{ backgroundColor: '#374151' }}
-                >
-                  <Github className="h-5 w-5" style={{ color: '#ffffff' }} />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          {/* 版权信息 */}
-          <div className="pt-8 border-t" style={{ borderColor: '#374151' }}>
-            <p
-              className="text-center"
-              style={{
-                fontSize: '14px',
-                color: '#6b7280',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'
-              }}
-            >
-              AI 简历优化 © 2026 · 保留所有权利
-            </p>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* 功能特性区域 */}
+      <section className="py-20" style={{ background: '#ffffff' }}>
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2
+              style={{
+                fontSize: '40px',
+                lineHeight: 1.1,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                fontWeight: 600,
+                color: '#1d1d1f',
+                letterSpacing: '-0.028em',
+                marginBottom: '8px'
+              }}
+            >
+              强大功能，助力你拿到心仪 Offer
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                icon: <Brain className="h-6 w-6" style={{ strokeWidth: 1.5 }} />,
+                title: 'AI 智能优化',
+                description: '基于 DeepSeek 大模型，深度理解你的简历和目标职位，智能优化内容表达'
+              },
+              {
+                icon: <Target className="h-6 w-6" style={{ strokeWidth: 1.5 }} />,
+                title: '关键词匹配',
+                description: '自动识别 JD 核心关键词，智能植入你的简历，大幅提高 ATS 通过率'
+              },
+              {
+                icon: <Zap className="h-6 w-6" style={{ strokeWidth: 1.5 }} />,
+                title: '成果量化',
+                description: '把模糊描述转化为数据支撑的成果，让你的经历更有说服力'
+              }
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-2xl transition-all duration-300 ease-out hover:transform hover:scale-105"
+                style={{
+                  background: 'linear-gradient(135deg, #fafafa 0%, #f5f5f7 100%)',
+                  border: '1px solid rgba(0, 0, 0, 0.05)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.06)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
+              >
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-6"
+                  style={{
+                    background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)'
+                  }}
+                >
+                  <div style={{ color: '#ffffff' }}>
+                    {feature.icon}
+                  </div>
+                </div>
+                <h3
+                  style={{
+                    fontSize: '21px',
+                    lineHeight: 1.19,
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 600,
+                    color: '#1d1d1f',
+                    letterSpacing: '-0.021em',
+                    marginBottom: '8px'
+                  }}
+                >
+                  {feature.title}
+                </h3>
+                <p
+                  style={{
+                    fontSize: '15px',
+                    lineHeight: 1.5,
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: 400,
+                    color: 'rgba(0, 0, 0, 0.6)',
+                    letterSpacing: '-0.01em'
+                  }}
+                >
+                  {feature.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 底部 CTA */}
+      <section className="py-20" style={{ background: '#f5f5f7' }}>
+        <div className="container mx-auto px-6 text-center">
+          <h2
+            style={{
+              fontSize: '40px',
+              lineHeight: 1.1,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 600,
+              color: '#1d1d1f',
+              letterSpacing: '-0.028em',
+              marginBottom: '24px'
+            }}
+          >
+            准备好让你的简历脱颖而出了吗？
+          </h2>
+          <p
+            style={{
+              fontSize: '19px',
+              lineHeight: 1.5,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 400,
+              color: 'rgba(0, 0, 0, 0.6)',
+              letterSpacing: '-0.021em',
+              marginBottom: '40px'
+            }}
+          >
+            只需粘贴简历和 JD，让 AI 帮你优化到完美
+          </p>
+          <Link
+            href="/dashboard"
+            className="inline-flex items-center gap-2 transition-all duration-300 ease-out"
+            style={{
+              background: 'linear-gradient(135deg, #0066ff 0%, #0055dd 100%)',
+              color: '#ffffff',
+              fontSize: '17px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 600,
+              letterSpacing: '-0.021em',
+              padding: '14px 32px',
+              borderRadius: '12px',
+              textDecoration: 'none',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              boxShadow: '0 8px 24px rgba(0, 102, 255, 0.35)'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'scale(1.02)';
+              e.currentTarget.style.boxShadow = '0 12px 32px rgba(0, 102, 255, 0.45)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'scale(1)';
+              e.currentTarget.style.boxShadow = '0 8px 24px rgba(0, 102, 255, 0.35)';
+            }}
+          >
+            立即开始优化
+            <ArrowRight className="h-5 w-5" style={{ strokeWidth: 1.5 }} />
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
