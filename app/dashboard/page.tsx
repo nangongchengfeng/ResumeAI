@@ -6,7 +6,7 @@ import ResumeInput from "@/components/ResumeInput";
 import JDInput from "@/components/JDInput";
 import ResultDisplay from "@/components/ResultDisplay";
 import QuantifyDialog from "@/components/QuantifyDialog";
-import { Sparkles, RefreshCw, Copy, Share2, ArrowLeft } from "lucide-react";
+import { Sparkles, RefreshCw, Copy, Download, ArrowLeft } from "lucide-react";
 
 export default function Dashboard() {
   const [resume, setResume] = useState("");
@@ -15,6 +15,7 @@ export default function Dashboard() {
   const [analysis, setAnalysis] = useState<any>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [viewMode, setViewMode] = useState<'rendered' | 'source'>('rendered');
 
   // 量化成果弹窗状态
   const [quantifyDialogOpen, setQuantifyDialogOpen] = useState(false);
@@ -121,7 +122,22 @@ export default function Dashboard() {
   const handleCopy = async () => {
     if (!result) return;
     await navigator.clipboard.writeText(result);
-    alert("已复制到剪贴板");
+    alert(viewMode === 'source' ? "已复制 Markdown 源码" : "已复制 Markdown 源码");
+  };
+
+  // 下载Markdown文件
+  const handleDownload = () => {
+    if (!result) return;
+    const blob = new Blob([result], { type: 'text/markdown;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    const date = new Date().toISOString().slice(0, 10);
+    link.href = url;
+    link.download = `优化简历_${date}.md`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -177,7 +193,8 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              {/* 次要操作 */}
               <button
                 onClick={handleQuantify}
                 disabled={!resume || isAnalyzing || isStreaming}
@@ -187,11 +204,11 @@ export default function Dashboard() {
                   fontSize: '14px',
                   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                   fontWeight: 500,
-                  padding: '8px 16px',
+                  padding: '10px 16px',
                   borderRadius: '12px',
                   border: '1px solid #e6f0ff',
                   cursor: 'pointer',
-                  minHeight: '40px',
+                  minHeight: '42px',
                   display: 'flex',
                   alignItems: 'center',
                   gap: '6px',
@@ -209,6 +226,11 @@ export default function Dashboard() {
                 <Sparkles className="h-4 w-4" />
                 AI 一键量化成果
               </button>
+
+              {/* 分割线 */}
+              <div style={{ width: '1px', height: '28px', backgroundColor: '#e6f0ff' }} />
+
+              {/* 工具操作 */}
               <button
                 onClick={() => {
                   setResult("");
@@ -216,12 +238,12 @@ export default function Dashboard() {
                 }}
                 style={{
                   backgroundColor: '#ffffff',
-                  color: '#0066ff',
+                  color: '#666666',
                   fontSize: '14px',
                   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                   fontWeight: 500,
-                  padding: '8px 16px',
-                  borderRadius: '12px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
                   border: '1px solid #e6f0ff',
                   cursor: 'pointer',
                   minHeight: '40px',
@@ -231,26 +253,26 @@ export default function Dashboard() {
                   transition: 'all 0.2s ease'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#e6f0ff';
+                  e.currentTarget.style.backgroundColor = '#f8fafc';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#ffffff';
                 }}
               >
                 <RefreshCw className="h-4 w-4" />
-                重新优化
+                重置
               </button>
               <button
                 onClick={handleCopy}
                 disabled={!result}
                 style={{
                   backgroundColor: '#ffffff',
-                  color: '#0066ff',
+                  color: '#666666',
                   fontSize: '14px',
                   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                   fontWeight: 500,
-                  padding: '8px 16px',
-                  borderRadius: '12px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
                   border: '1px solid #e6f0ff',
                   cursor: 'pointer',
                   minHeight: '40px',
@@ -262,7 +284,7 @@ export default function Dashboard() {
                 }}
                 onMouseEnter={(e) => {
                   if (!result) return;
-                  e.currentTarget.style.backgroundColor = '#e6f0ff';
+                  e.currentTarget.style.backgroundColor = '#f8fafc';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#ffffff';
@@ -272,15 +294,16 @@ export default function Dashboard() {
                 复制
               </button>
               <button
+                onClick={handleDownload}
                 disabled={!result}
                 style={{
                   backgroundColor: '#ffffff',
-                  color: '#0066ff',
+                  color: '#666666',
                   fontSize: '14px',
                   fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                   fontWeight: 500,
-                  padding: '8px 16px',
-                  borderRadius: '12px',
+                  padding: '10px 14px',
+                  borderRadius: '10px',
                   border: '1px solid #e6f0ff',
                   cursor: 'pointer',
                   minHeight: '40px',
@@ -292,14 +315,14 @@ export default function Dashboard() {
                 }}
                 onMouseEnter={(e) => {
                   if (!result) return;
-                  e.currentTarget.style.backgroundColor = '#e6f0ff';
+                  e.currentTarget.style.backgroundColor = '#f8fafc';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor = '#ffffff';
                 }}
               >
-                <Share2 className="h-4 w-4" />
-                分享
+                <Download className="h-4 w-4" />
+                下载
               </button>
             </div>
           </div>
@@ -308,17 +331,16 @@ export default function Dashboard() {
 
       {/* 三栏主体 */}
       <main className="flex-1 flex overflow-hidden">
-        {/* 左栏：简历输入 - 30% */}
-        <div className="flex flex-col" style={{ width: '30%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
+        {/* 左栏：简历输入 - 35% */}
+        <div className="flex flex-col" style={{ width: '35%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
           <ResumeInput
             value={resume}
             onChange={setResume}
-            onQuantify={handleQuantify}
           />
         </div>
 
-        {/* 中栏：JD 输入 - 30% */}
-        <div className="flex flex-col" style={{ width: '30%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
+        {/* 中栏：JD 输入 - 25% */}
+        <div className="flex flex-col" style={{ width: '25%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
           <JDInput value={jd} onChange={setJd} />
         </div>
 
@@ -331,6 +353,8 @@ export default function Dashboard() {
             isAnalyzing={isAnalyzing}
             isStreaming={isStreaming}
             canOptimize={!!resume && !!jd}
+            viewMode={viewMode}
+            onViewModeChange={setViewMode}
           />
         </div>
       </main>

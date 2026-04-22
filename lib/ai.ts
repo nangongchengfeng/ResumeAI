@@ -4,6 +4,6 @@ export const SILICONFLOW_API_KEY = process.env.SILICONFLOW_API_KEY || "";
 
 // 模型配置
 export const MODELS = {
-  default: "deepseek-ai/DeepSeek-V2.5",
-  fast: "deepseek-ai/DeepSeek-V2.5",
+  default: process.env.SILICONFLOW_MODEL_DEFAULT || "deepseek-ai/DeepSeek-V3.2",
+  fast: process.env.SILICONFLOW_MODEL_FAST || process.env.SILICONFLOW_MODEL_DEFAULT || "deepseek-ai/DeepSeek-V3.2",
 } as const;
