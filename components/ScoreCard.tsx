@@ -21,33 +21,35 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
   return (
     <div
       style={{
-        backgroundColor: '#f8fafc',
+        background: 'linear-gradient(135deg, #f8fafc 0%, #f5f7fa 100%)',
         borderRadius: '16px',
-        padding: '24px',
-        border: '1px solid #e6f0ff',
+        padding: '20px',
+        border: '1px solid rgba(0, 0, 0, 0.05)',
         ...style
       }}
     >
       <div className="flex items-center justify-between mb-4">
         <h3
           style={{
-            fontSize: '18px',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontSize: '15px',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
             fontWeight: 600,
-            color: '#1a1a1a'
+            color: '#1d1d1f',
+            letterSpacing: '-0.02em'
           }}
         >
           简历评分
         </h3>
         <div
           style={{
-            padding: '6px 16px',
-            borderRadius: '20px',
-            fontSize: '20px',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            padding: '6px 14px',
+            borderRadius: '980px',
+            fontSize: '15px',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
             fontWeight: 700,
-            backgroundColor: '#e6f0ff',
-            color: '#0066ff'
+            background: 'linear-gradient(135deg, rgba(0, 102, 255, 0.1) 0%, rgba(0, 85, 221, 0.1) 100%)',
+            color: '#0066ff',
+            letterSpacing: '-0.02em'
           }}
         >
           {analysis.grade}
@@ -57,22 +59,24 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
       <div
         className="mb-2"
         style={{
-          fontSize: '44px',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontSize: '40px',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
           fontWeight: 700,
-          color: '#1a1a1a'
+          color: '#1d1d1f',
+          letterSpacing: '-0.03em'
         }}
       >
-        {analysis.score}/100
+        {analysis.score}<span style={{ fontSize: '24px', fontWeight: 600 }}>/100</span>
       </div>
       <p
         className="mb-6"
         style={{
-          fontSize: '15px',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontSize: '13px',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
           fontWeight: 400,
-          lineHeight: 1.6,
-          color: '#4a4a4a'
+          lineHeight: 1.5,
+          color: 'rgba(0, 0, 0, 0.6)',
+          letterSpacing: '-0.01em'
         }}
       >
         {analysis.score_text}
@@ -80,177 +84,26 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
 
       {/* 评分明细 */}
       <div className="space-y-4 mb-6">
-        <div>
-          <div className="flex justify-between mb-2">
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 500,
-                color: '#1a1a1a'
-              }}
-            >
-              关键词匹配度
-            </span>
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 600,
-                color: '#0066ff'
-              }}
-            >
-              {analysis.score_breakdown.keyword_match}/40
-            </span>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#e6f0ff',
-              borderRadius: '10px',
-              height: '10px'
-            }}
-          >
-            <div
-              style={{
-                width: `${(analysis.score_breakdown.keyword_match / 40) * 100}%`,
-                backgroundColor: '#0066ff',
-                height: '10px',
-                borderRadius: '10px',
-                transition: 'width 0.5s ease'
-              }}
-            ></div>
-          </div>
-        </div>
-
-        <div>
-          <div className="flex justify-between mb-2">
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 500,
-                color: '#1a1a1a'
-              }}
-            >
-              成果量化程度
-            </span>
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 600,
-                color: '#0066ff'
-              }}
-            >
-              {analysis.score_breakdown.quantification}/30
-            </span>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#e6f0ff',
-              borderRadius: '10px',
-              height: '10px'
-            }}
-          >
-            <div
-              style={{
-                width: `${(analysis.score_breakdown.quantification / 30) * 100}%`,
-                backgroundColor: '#0066ff',
-                height: '10px',
-                borderRadius: '10px',
-                transition: 'width 0.5s ease'
-              }}
-            ></div>
-          </div>
-        </div>
-
-        <div>
-          <div className="flex justify-between mb-2">
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 500,
-                color: '#1a1a1a'
-              }}
-            >
-              STAR 法则运用
-            </span>
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 600,
-                color: '#0066ff'
-              }}
-            >
-              {analysis.score_breakdown.star_framework}/20
-            </span>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#e6f0ff',
-              borderRadius: '10px',
-              height: '10px'
-            }}
-          >
-            <div
-              style={{
-                width: `${(analysis.score_breakdown.star_framework / 20) * 100}%`,
-                backgroundColor: '#0066ff',
-                height: '10px',
-                borderRadius: '10px',
-                transition: 'width 0.5s ease'
-              }}
-            ></div>
-          </div>
-        </div>
-
-        <div>
-          <div className="flex justify-between mb-2">
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 500,
-                color: '#1a1a1a'
-              }}
-            >
-              语言专业性
-            </span>
-            <span
-              style={{
-                fontSize: '14px',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                fontWeight: 600,
-                color: '#0066ff'
-              }}
-            >
-              {analysis.score_breakdown.professionalism}/10
-            </span>
-          </div>
-          <div
-            style={{
-              width: '100%',
-              backgroundColor: '#e6f0ff',
-              borderRadius: '10px',
-              height: '10px'
-            }}
-          >
-            <div
-              style={{
-                width: `${(analysis.score_breakdown.professionalism / 10) * 100}%`,
-                backgroundColor: '#0066ff',
-                height: '10px',
-                borderRadius: '10px',
-                transition: 'width 0.5s ease'
-              }}
-            ></div>
-          </div>
-        </div>
+        <ScoreBar
+          label="关键词匹配度"
+          value={analysis.score_breakdown.keyword_match}
+          maxValue={40}
+        />
+        <ScoreBar
+          label="成果量化程度"
+          value={analysis.score_breakdown.quantification}
+          maxValue={30}
+        />
+        <ScoreBar
+          label="STAR 法则运用"
+          value={analysis.score_breakdown.star_framework}
+          maxValue={20}
+        />
+        <ScoreBar
+          label="语言专业性"
+          value={analysis.score_breakdown.professionalism}
+          maxValue={10}
+        />
       </div>
 
       {/* 缺失关键词 */}
@@ -259,10 +112,11 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
           <h4
             className="mb-3"
             style={{
-              fontSize: '15px',
-              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontSize: '13px',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
               fontWeight: 600,
-              color: '#1a1a1a'
+              color: '#1d1d1f',
+              letterSpacing: '-0.01em'
             }}
           >
             缺失关键词
@@ -272,13 +126,14 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
               <span
                 key={index}
                 style={{
-                  padding: '6px 12px',
-                  backgroundColor: '#e6f0ff',
+                  padding: '5px 12px',
+                  backgroundColor: 'rgba(0, 102, 255, 0.08)',
                   color: '#0066ff',
-                  borderRadius: '8px',
-                  fontSize: '14px',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-                  fontWeight: 500
+                  borderRadius: '980px',
+                  fontSize: '12px',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: 500,
+                  letterSpacing: '-0.01em'
                 }}
               >
                 {keyword}
@@ -291,15 +146,69 @@ export default function ScoreCard({ analysis, style }: ScoreCardProps) {
       {/* 分析 */}
       <p
         style={{
-          fontSize: '14px',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontSize: '13px',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
           fontWeight: 400,
-          lineHeight: 1.6,
-          color: '#4a4a4a'
+          lineHeight: 1.5,
+          color: 'rgba(0, 0, 0, 0.6)',
+          letterSpacing: '-0.01em'
         }}
       >
         {analysis.analysis}
       </p>
+    </div>
+  );
+}
+
+// 评分条组件
+function ScoreBar({ label, value, maxValue }: { label: string, value: number, maxValue: number }) {
+  const percentage = (value / maxValue) * 100;
+
+  return (
+    <div>
+      <div className="flex justify-between mb-2">
+        <span
+          style={{
+            fontSize: '12px',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+            fontWeight: 500,
+            color: 'rgba(0, 0, 0, 0.6)',
+            letterSpacing: '-0.01em'
+          }}
+        >
+          {label}
+        </span>
+        <span
+          style={{
+            fontSize: '12px',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+            fontWeight: 600,
+            color: '#0066ff',
+            letterSpacing: '-0.01em'
+          }}
+        >
+          {value}/{maxValue}
+        </span>
+      </div>
+      <div
+        style={{
+          width: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.06)',
+          borderRadius: '980px',
+          height: '8px',
+          overflow: 'hidden'
+        }}
+      >
+        <div
+          style={{
+            width: `${percentage}%`,
+            background: 'linear-gradient(90deg, #0066ff 0%, #0055dd 100%)',
+            height: '8px',
+            borderRadius: '980px',
+            transition: 'width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)'
+          }}
+        ></div>
+      </div>
     </div>
   );
 }
