@@ -52,7 +52,9 @@ export default function Dashboard() {
   // 接受量化修改
   const acceptQuantify = () => {
     if (quantifyResult) {
-      setResume(quantifyResult.modified_resume);
+      // 去掉 <mark> 标签
+      const cleanResume = quantifyResult.modified_resume.replace(/<mark>/g, '').replace(/<\/mark>/g, '');
+      setResume(cleanResume);
     }
     setQuantifyDialogOpen(false);
     setQuantifyResult(null);
@@ -306,8 +308,8 @@ export default function Dashboard() {
 
       {/* 三栏主体 */}
       <main className="flex-1 flex overflow-hidden">
-        {/* 左栏：简历输入 */}
-        <div className="w-1/4 flex flex-col" style={{ borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
+        {/* 左栏：简历输入 - 30% */}
+        <div className="flex flex-col" style={{ width: '30%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
           <ResumeInput
             value={resume}
             onChange={setResume}
@@ -315,13 +317,13 @@ export default function Dashboard() {
           />
         </div>
 
-        {/* 中栏：JD 输入 */}
-        <div className="w-1/4 flex flex-col" style={{ borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
+        {/* 中栏：JD 输入 - 30% */}
+        <div className="flex flex-col" style={{ width: '30%', borderRight: '1px solid #e6f0ff', backgroundColor: '#ffffff' }}>
           <JDInput value={jd} onChange={setJd} />
         </div>
 
-        {/* 右栏：结果展示 */}
-        <div className="w-2/4 flex flex-col" style={{ backgroundColor: '#ffffff' }}>
+        {/* 右栏：结果展示 - 40% */}
+        <div className="flex flex-col" style={{ width: '40%', backgroundColor: '#ffffff' }}>
           <ResultDisplay
             analysis={analysis}
             result={result}

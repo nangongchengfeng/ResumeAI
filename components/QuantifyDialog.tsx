@@ -1,6 +1,7 @@
 "use client";
 
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { CheckCircle2, AlertCircle, XCircle, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
@@ -62,8 +63,8 @@ export default function QuantifyDialog({
           <mark
             key={index}
             style={{
-              backgroundColor: 'rgba(0, 102, 255, 0.15)',
-              color: '#0066ff',
+              backgroundColor: 'rgba(239, 68, 68, 0.15)',
+              color: '#dc2626',
               padding: '2px 6px',
               borderRadius: '4px',
               fontWeight: 500
@@ -377,7 +378,7 @@ export default function QuantifyDialog({
                 fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
                 marginBottom: qualityCheck ? 0 : '12px'
               }}>
-                修改后的简历 <span style={{ color: '#0066ff' }}>（高亮部分为修改内容）</span>
+                修改后的简历 <span style={{ color: '#dc2626' }}>（红色部分为修改内容）</span>
               </div>
             </div>
             <div
